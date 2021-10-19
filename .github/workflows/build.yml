@@ -42,13 +42,20 @@ jobs:
           python-version: 3.8
 
       - name: Install Python dependencies
-        run: pip install black flake8
+        run: pip install pylint isort pycodestyle vulture
+        
 
       - name: Checking Python-Lint
-        uses: wearerequired/lint-action@v1
+      - uses: actions/checkout@v1
+      - uses: rahul-deepsource/pyaction@1.4.0
         with:
-          black: true
-          flake8: true
+          use-pycodestyle: true
+          use-isort: true
+          use-vulture: true
+          use-pylint: true
+          use-mypy: false
+          use-flake8: false
+          use-black: false
 
   security:
     runs-on: ubuntu-latest
