@@ -51,9 +51,9 @@ jobs:
       - name: Install Python dependencies
         run: pip install pylint isort pycodestyle vulture
 
-      - name: Checking Python-Lint
       - uses: actions/checkout@v1
-      - uses: rahul-deepsource/pyaction@1.4.0
+      - name: Checking Python-Lint
+        uses: rahul-deepsource/pyaction@1.4.0
         with:
           use-pycodestyle: true
           use-isort: true
