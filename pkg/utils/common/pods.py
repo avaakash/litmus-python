@@ -1,6 +1,6 @@
-"""
+'''
     pods package
-"""
+'''
 
 import random
 import logging
@@ -12,10 +12,10 @@ from pkg.maths import maths
 
 
 class Pods(object):
-    """ Pods class is to set, delete, retreive, verify etc... activity for pods and containers """
+    ''' Pods class is to set, delete, retreive, verify etc... activity for pods and containers '''
 
     def GetChaosPodAnnotation(self, clients, podName, namespace):
-        """ GetChaosPodAnnotation will return the annotation on chaos pod """
+        ''' GetChaosPodAnnotation will return the annotation on chaos pod '''
 
         try:
             pod = clients.clientCoreV1.read_namespaced_pod(podName, namespace)
@@ -24,7 +24,7 @@ class Pods(object):
         return pod.metadata.annotations, None
 
     def VerifyExistanceOfPods(self, namespace, pods, clients):
-        """ VerifyExistanceOfPods check the availibility of list of pods """
+        ''' VerifyExistanceOfPods check the availibility of list of pods '''
 
         if pods == "":
             return False, None
@@ -40,10 +40,10 @@ class Pods(object):
         return True, None
 
     def GetPodList(self, targetPods, podAffPerc, chaosDetails, clients):
-        """
+        '''
             GetPodList check for the availibilty of the target pod for the chaos execution
             if the target pod is not defined it will derive the random target pod list using pod affected percentage
-        """
+        '''
 
         realpods = client.V1PodList
         isPodsAvailable, err = self.VerifyExistanceOfPods(
@@ -70,7 +70,7 @@ class Pods(object):
         return realpods, None
 
     def CheckForAvailibiltyOfPod(self, namespace, name, clients):
-        """ CheckForAvailibiltyOfPod check the availibility of the specified pod """
+        ''' CheckForAvailibiltyOfPod check the availibility of the specified pod '''
 
         if name == "":
             return False, None
@@ -84,10 +84,10 @@ class Pods(object):
         return True, None
 
     def FilterNonChaosPods(self, chaosDetails, clients):
-        """
+        '''
             FilterNonChaosPods remove the chaos pods(operator, runner) for the podList
             it filter when the applabels are not defined and it will select random pods from appns
-        """
+        '''
         try:
             podList = clients.clientCoreV1.list_namespaced_pod(
                 chaosDetails.AppDetail.Namespace, label_selector=chaosDetails.AppDetail.Label)
@@ -105,7 +105,7 @@ class Pods(object):
         return client.V1PodList(items=nonChaosPods)
 
     def GetTargetPodsWhenTargetPodsENVSet(self, targetPods, chaosDetails, clients):
-        """ GetTargetPodsWhenTargetPodsENVSet derive the specific target pods, if TARGET_PODS env is set """
+        ''' GetTargetPodsWhenTargetPodsENVSet derive the specific target pods, if TARGET_PODS env is set '''
 
         targetPodsList = targetPods.split(",")
         realPodList = []
@@ -136,7 +136,7 @@ class Pods(object):
         return client.V1PodList(items=realPodList), None
 
     def GetTargetPodsWhenTargetPodsENVNotSet(self, podAffPerc, nonChaosPods, chaosDetails, clients):
-        """ GetTargetPodsWhenTargetPodsENVNotSet derives the random target pod list, if TARGET_PODS env is not set """
+        ''' GetTargetPodsWhenTargetPodsENVNotSet derives the random target pod list, if TARGET_PODS env is not set '''
 
         filteredPods = []
         realPods = []

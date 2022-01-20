@@ -1,12 +1,12 @@
-"""
+'''
     pod-delete types package
-"""
+'''
 
 
 class ExperimentDetails(object):
-    """
+    '''
         ExperimentDetails is for collecting all the experiment-related details
-    """
+    '''
 
     def __init__(self, ExperimentName=None, EngineName=None, ChaosDuration=None, ChaosInterval=None, RampTime=None,
                  Force=None, ChaosLib=None, ChaosServiceAccount=None, AppNS=None, AppLabel=None, AppKind=None, InstanceID=None,

@@ -1,6 +1,6 @@
-"""
+'''
     types package
-"""
+'''
 
 
 # PreChaosCheck initial stage of experiment check for health before chaos injection
@@ -22,7 +22,7 @@ StoppedVerdict = "Stopped"
 
 
 class ResultDetails(object):
-    """ ResultDetails is for collecting all the chaos-result-related details """
+    ''' ResultDetails is for collecting all the chaos-result-related details '''
 
     def __init__(self, Name=None, Verdict=None, FailStep=None, Phase=None,
                  PassedProbeCount=None, UID=None):
@@ -35,7 +35,7 @@ class ResultDetails(object):
 
 
 class EventDetails(object):
-    """ EventDetails is for collecting all the events-related details """
+    ''' EventDetails is for collecting all the events-related details '''
 
     def __init__(self, Message=None, Reason=None, ResourceName=None, Type=None, UID=None):
         self.Message = Message
@@ -46,7 +46,7 @@ class EventDetails(object):
 
 
 class AppDetails(object):
-    """ AppDetails contains all the application related envs """
+    ''' AppDetails contains all the application related envs '''
 
     def __init__(self, Namespace=None, Label=None, Kind=None, AnnotationCheck=None, AnnotationKey=None, AnnotationValue=None):
         self.Namespace = Namespace
@@ -58,7 +58,7 @@ class AppDetails(object):
 
 
 class ChaosDetails(object):
-    """ ChaosDetails is for collecting all the global variables """
+    ''' ChaosDetails is for collecting all the global variables '''
 
     def __init__(self, ChaosPodName=None, ChaosNamespace=None, EngineName=None, InstanceID=None,
                  ExperimentName=None, Timeout=None, Delay=None, ChaosDuration=None, JobCleanupPolicy=None,
@@ -81,12 +81,12 @@ class ChaosDetails(object):
         self.ParentsResources = []
 
     def append(self, value):
-        """ append adds resources to the parents resources """
+        ''' append adds resources to the parents resources '''
         self.ParentsResources.append(value)
 
 
 def SetResultAttributes(ResultDetails, ChaosDetails):
-    """ SetResultAttributes initialise all the chaos result ENV """
+    ''' SetResultAttributes initialise all the chaos result ENV '''
     ResultDetails.Verdict = "Awaited"
     ResultDetails.Phase = "Running"
     ResultDetails.FailStep = "N/A"
@@ -101,14 +101,14 @@ def SetResultAttributes(ResultDetails, ChaosDetails):
 
 
 def SetResultAfterCompletion(ResultDetails, verdict, phase, failStep):
-    """ SetResultAfterCompletion set all the chaos result ENV in the EOT """
+    ''' SetResultAfterCompletion set all the chaos result ENV in the EOT '''
     ResultDetails.Verdict = verdict
     ResultDetails.Phase = phase
     ResultDetails.FailStep = failStep
 
 
 def SetEngineEventAttributes(EventDetails, Reason, Message, Type, ChaosDetails):
-    """ SetEngineEventAttributes initialise attributes for event generation in chaos engine """
+    ''' SetEngineEventAttributes initialise attributes for event generation in chaos engine '''
     EventDetails.Reason = Reason
     EventDetails.Message = Message
     EventDetails.ResourceName = ChaosDetails.EngineName
@@ -117,7 +117,7 @@ def SetEngineEventAttributes(EventDetails, Reason, Message, Type, ChaosDetails):
 
 
 def SetResultEventAttributes(EventDetails, Reason, Message, Type, ResultDetails):
-    """ SetResultEventAttributes initialise attributes for event generation in chaos result """
+    ''' SetResultEventAttributes initialise attributes for event generation in chaos result '''
     EventDetails.Reason = Reason
     EventDetails.Message = Message
     EventDetails.ResourceName = ResultDetails.Name

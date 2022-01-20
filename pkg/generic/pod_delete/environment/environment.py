@@ -1,6 +1,6 @@
-"""
+'''
     environment variable for pod-delete experiment
-"""
+'''
 
 
 import os
@@ -10,7 +10,7 @@ from pkg.maths import maths
 
 
 def GetENV(experimentDetails):
-    """ GetENV fetches all the env variables from the runner pod """
+    ''' GetENV fetches all the env variables from the runner pod '''
     experimentDetails.ExperimentName = os.getenv(
         "EXPERIMENT_NAME", "pod-delete")
     experimentDetails.ChaosNamespace = os.getenv("CHAOS_NAMESPACE", "litmus")
@@ -38,7 +38,7 @@ def GetENV(experimentDetails):
 
 
 def InitialiseChaosVariables(chaosDetails, experimentDetails):
-    """ InitialiseChaosVariables initialise all the global variables """
+    ''' InitialiseChaosVariables initialise all the global variables '''
     appDetails = types.AppDetails()
     appDetails.AnnotationCheck = (
         os.getenv("ANNOTATION_CHECK", "false") == 'true')

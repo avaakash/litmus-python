@@ -1,6 +1,6 @@
-"""
+'''
     common package
-"""
+'''
 
 
 import time
@@ -19,12 +19,12 @@ from pkg.maths import maths
 
 
 def WaitForDuration(duration):
-    """ WaitForDuration waits for the given time duration (in seconds) """
+    ''' WaitForDuration waits for the given time duration (in seconds) '''
     time.sleep(duration)
 
 
 def RandomInterval(interval):
-    """ RandomInterval wait for the random interval lies between lower & upper bounds """
+    ''' RandomInterval wait for the random interval lies between lower & upper bounds '''
     intervals = interval.split("-")
     lowerBound = 0
     upperBound = 0
@@ -45,10 +45,10 @@ def RandomInterval(interval):
 
 
 def GetTargetContainer(appNamespace, appName, clients):
-    """
+    '''
         GetTargetContainer will fetch the container name from application pod
         This container will be used as target container
-    """
+    '''
 
     try:
         pod = clients.clientCoreV1.read_namespaced_pod(
@@ -60,16 +60,16 @@ def GetTargetContainer(appNamespace, appName, clients):
 
 
 def GetRunID():
-    """ GetRunID generate a random """
+    ''' GetRunID generate a random '''
     runId = ''.join(random.choices(
         string.ascii_uppercase + string.digits, k=6))
     return str(runId)
 
 
 def Notify(expname, resultDetails, chaosDetails, eventsDetails, clients):
-    """
+    '''
         Notify Catch and relay certain signal(s) to sendor. Waiting until the abort signal recieved
-    """
+    '''
 
     # initialising result object
     result = chaosresult.ChaosResults()
@@ -95,11 +95,11 @@ def Notify(expname, resultDetails, chaosDetails, eventsDetails, clients):
 
 
 def AbortWatcher(expname, resultDetails, chaosDetails, eventsDetails, clients):
-    """
+    '''
         AbortWatcher continuosly watch for the abort signals
         it will update chaosresult w/ failed step and create an abort event,
         if it recieved abort signal during chaos
-    """
+    '''
 
     # sendor thread is used to transmit signal notifications.
     sender = threading.Thread(target=Notify, args=(
@@ -115,7 +115,7 @@ def AbortWatcher(expname, resultDetails, chaosDetails, eventsDetails, clients):
 
 
 def GetIterations(duration, interval):
-    """ GetIterations derive the iterations value from given parameters """
+    ''' GetIterations derive the iterations value from given parameters '''
     iterations = 0
     if interval != 0:
         iterations = duration / interval
@@ -123,7 +123,7 @@ def GetIterations(duration, interval):
 
 
 def Getenv(key, defaultValue):
-    """ Getenv fetch the env and set the default value, if any """
+    ''' Getenv fetch the env and set the default value, if any '''
     value = os.Getenv(key)
     if value == "":
         value = defaultValue
@@ -132,7 +132,7 @@ def Getenv(key, defaultValue):
 
 
 def FilterBasedOnPercentage(percentage, array):
-    """ FilterBasedOnPercentage return the slice of list based on the the provided percentage """
+    ''' FilterBasedOnPercentage return the slice of list based on the the provided percentage '''
 
     finalList = []
     newInstanceListLength = max(1, maths.Adjustment(percentage, len(array)))

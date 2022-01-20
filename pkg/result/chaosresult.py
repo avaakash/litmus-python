@@ -1,6 +1,6 @@
-"""
+'''
     chaosresult package
-"""
+'''
 
 
 import os
@@ -12,10 +12,10 @@ from pkg.types import types
 
 
 class ChaosResults(object):
-    """ ChaosResult Class to Create, Path and track result details """
+    ''' ChaosResult Class to Create, Path and track result details '''
 
     def ChaosResult(self, chaosDetails, resultDetails, state, clients):
-        """ ChaosResult Create and Update the chaos result"""
+        ''' ChaosResult Create and Update the chaos result'''
 
         # Initialise experimentLabel
         experimentLabel = {}
@@ -59,7 +59,7 @@ class ChaosResults(object):
 
     def InitializeChaosResult(self, chaosDetails, resultDetails, experimentLabel,
                               passedRuns=0,  failedRuns=0, stoppedRuns=0, probeSuccessPercentage="Awaited"):
-        """ InitializeChaosResult or patch the chaos result """
+        ''' InitializeChaosResult or patch the chaos result '''
 
         try:
             env_tmpl = Environment(loader=PackageLoader('pkg', 'result'), trim_blocks=True, lstrip_blocks=True,
@@ -92,7 +92,7 @@ class ChaosResults(object):
         return None
 
     def PatchChaosResult(self, result, chaosDetails, resultDetails, chaosResultLabel):
-        """ PatchChaosResult Update the chaos result """
+        ''' PatchChaosResult Update the chaos result '''
 
         passedRuns = 0
         failedRuns = 0
@@ -117,7 +117,7 @@ class ChaosResults(object):
                                           passedRuns, failedRuns, stoppedRuns, probeSuccessPercentage)
 
     def SetResultUID(self, resultDetails, clients):
-        """ SetResultUID sets the ResultUID into the ResultDetails structure """
+        ''' SetResultUID sets the ResultUID into the ResultDetails structure '''
 
         try:
             chaosResults = clients.clientDyn.resources.get(
@@ -133,7 +133,7 @@ class ChaosResults(object):
         return None
 
     def RecordAfterFailure(self, chaosDetails, resultDetails, failStep, eventsDetails, clients):
-        """ RecordAfterFailure update the chaosresult and create the summary events """
+        ''' RecordAfterFailure update the chaosresult and create the summary events '''
 
         # update the chaos result
         types.SetResultAfterCompletion(

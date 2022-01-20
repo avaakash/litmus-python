@@ -1,6 +1,6 @@
-"""
+'''
     application package
-"""
+'''
 
 
 import time
@@ -10,14 +10,14 @@ from pkg.utils.annotation import annotation
 
 
 class Application(object):
-    """ Application class is checking the status of application """
+    ''' Application class is checking the status of application '''
 
     def AUTStatusCheck(self, appNs, appLabel, containerName, timeout, delay, chaosDetails, clients):
-        """
+        '''
             AUTStatusCheck checks the status of application under test
             If annotationCheck is true, it will check the status of the annotated pod only
             else it will check status of all pods with matching label
-        """
+        '''
 
         if chaosDetails.AppDetail.AnnotationCheck:
             logging.info("[Info]: Check Annotated for Applications Status")
@@ -49,7 +49,7 @@ class Application(object):
         return None
 
     def AnnotatedApplicationsStatusCheck(self, clients, appNs, appLabel, containerName, chaosDetails, init, timeout, delay):
-        """ AnnotatedApplicationsStatusCheck checks the status of all the annotated applications with matching label """
+        ''' AnnotatedApplicationsStatusCheck checks the status of all the annotated applications with matching label '''
 
         try:
             podList = clients.clientCoreV1.list_namespaced_pod(
@@ -110,7 +110,7 @@ class Application(object):
         return None
 
     def CheckApplicationStatus(self, appNs, appLabel, timeout, delay, clients):
-        """ CheckApplicationStatus checks the status of the AUT """
+        ''' CheckApplicationStatus checks the status of the AUT '''
 
         if appLabel == "":
             # Checking whether applications are healthy
@@ -137,7 +137,7 @@ class Application(object):
 
     # CheckAuxiliaryApplicationStatus checks the status of the Auxiliary applications
     def CheckAuxiliaryApplicationStatus(self, AuxiliaryAppDetails, timeout, delay, clients):
-        """ CheckAuxiliaryApplicationStatus checks the status of the Auxiliary applications """
+        ''' CheckAuxiliaryApplicationStatus checks the status of the Auxiliary applications '''
         AuxiliaryAppInfo = AuxiliaryAppDetails.split(",")
         for val in AuxiliaryAppInfo:
             AppInfo = val.split(":")
@@ -149,7 +149,7 @@ class Application(object):
         return None
 
     def CheckPodStatusPhase(self, clients, appNs, appLabel, states, init, timeout, delay):
-        """ CheckPodStatusPhase is helper to checks the running status of the application pod """
+        ''' CheckPodStatusPhase is helper to checks the running status of the application pod '''
 
         try:
             podList = clients.clientCoreV1.list_namespaced_pod(
@@ -171,15 +171,15 @@ class Application(object):
         return None
 
     def CheckPodStatus(self, clients, appNs, appLabel, tries, timeout, delay):
-        """ CheckPodStatus checks the running status of the application pod """
+        ''' CheckPodStatus checks the running status of the application pod '''
         return self.CheckPodStatusPhase(clients, appNs, appLabel, "Running", tries, timeout, delay)
 
     def CheckContainerStatus(self, clients, appNs, appLabel, containerName, init, timeout, delay):
-        """
+        '''
             CheckContainerStatus checks the status of the application container for given timeout,
             if it does not match label it will
             retry for timeout time
-        """
+        '''
         try:
             podList = clients.clientCoreV1.list_namespaced_pod(
                 appNs, label_selector=appLabel)
@@ -206,7 +206,7 @@ class Application(object):
         return None
 
     def validateContainerStatus(self, containerName, podName, ContainerStatuses):
-        """ validateContainerStatus verify that the provided container should be in ready state """
+        ''' validateContainerStatus verify that the provided container should be in ready state '''
         for container in ContainerStatuses:
             if container.name == containerName:
                 if container.state.terminated is not None:
@@ -219,7 +219,7 @@ class Application(object):
         return None
 
     def validateAllContainerStatus(self, podName, ContainerStatuses):
-        """ validateAllContainerStatus verify that the all the containers should be in ready state """
+        ''' validateAllContainerStatus verify that the all the containers should be in ready state '''
         for container in ContainerStatuses:
             err = self.validateContainerStatus(
                 container.name, podName, ContainerStatuses)

@@ -1,13 +1,13 @@
-"""
+'''
     annotation package
-"""
+'''
 
 
 def getDeploymentName(targetPod, chaosDetails, clients):
-    """
+    '''
         getDeploymentName derive the deployment name belongs to the given target pod
         it extract the parent name from the owner references
-    """
+    '''
     rsOwnerRef = targetPod.metadata.owner_references
     for own in rsOwnerRef:
         if own.kind == "ReplicaSet":
@@ -25,10 +25,10 @@ def getDeploymentName(targetPod, chaosDetails, clients):
 
 
 def getStatefulsetName(targetPod):
-    """
+    '''
         getStatefulsetName derive the statefulset name belongs to the given target pod
         it extract the parent name from the owner references
-    """
+    '''
 
     ownerRef = targetPod.metadata.owner_references
     for own in ownerRef:
@@ -39,10 +39,10 @@ def getStatefulsetName(targetPod):
 
 
 def getDaemonsetName(targetPod):
-    """
+    '''
         getDaemonsetName derive the daemonset name belongs to the given target pod
         it extract the parent name from the owner references
-    """
+    '''
 
     ownerRef = targetPod.metadata.owner_references
     for own in ownerRef:
@@ -53,10 +53,10 @@ def getDaemonsetName(targetPod):
 
 
 def getDeploymentConfigName(targetPod, chaosDetails, clients):
-    """
+    '''
         getDeploymentConfigName derive the deploymentConfig name belongs to the given target pod
         it extract the parent name from the owner references
-    """
+    '''
 
     rcOwnerRef = targetPod.metadata.owner_references
     for own in range(rcOwnerRef):
@@ -75,10 +75,10 @@ def getDeploymentConfigName(targetPod, chaosDetails, clients):
 
 
 def getRolloutName(targetPod, chaosDetails, clients):
-    """
+    '''
         getDeploymentConfigName derive the rollout name belongs to the given target pod
         it extract the parent name from the owner references
-    """
+    '''
 
     rsOwnerRef = targetPod.metadata.owner_references
     for own in rsOwnerRef:
@@ -97,7 +97,7 @@ def getRolloutName(targetPod, chaosDetails, clients):
 
 
 def GetParentName(clients, targetPod, chaosDetails):
-    """ GetParentName derive the parent name of the given target pod """
+    ''' GetParentName derive the parent name of the given target pod '''
 
     kind = chaosDetails.AppDetail.Kind
     if kind in ("deployment", "deployments"):
@@ -114,7 +114,7 @@ def GetParentName(clients, targetPod, chaosDetails):
 
 
 def IsParentAnnotated(clients, parentName, chaosDetails):
-    """ IsParentAnnotated check whether the target pod's parent is annotated or not """
+    ''' IsParentAnnotated check whether the target pod's parent is annotated or not '''
     if chaosDetails.AppDetail.Kind.lower() == "deployment" or chaosDetails.AppDetail.Kind.lower() == "deployments":
         try:
             deploy = clients.clientApps.read_namespaced_deployment(

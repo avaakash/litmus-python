@@ -1,6 +1,6 @@
-"""
+'''
     Chaoslib for pod-delete experiment
-"""
+'''
 import logging
 from datetime import datetime
 
@@ -12,7 +12,7 @@ from pkg.maths import maths
 
 
 def PreparePodDelete(experimentsDetails, eventsDetails, chaosDetails, clients):
-    """PreparePodDelete contains the prepration steps before chaos injection"""
+    '''PreparePodDelete contains the prepration steps before chaos injection'''
 
     #Waiting for the ramp time before chaos injection
     if experimentsDetails.RampTime != 0:
@@ -43,9 +43,9 @@ def PreparePodDelete(experimentsDetails, eventsDetails, chaosDetails, clients):
 
 
 def injectChaosInSerialMode(experimentsDetails, chaosDetails, eventsDetails, clients):
-    """
+    '''
         injectChaosInSerialMode delete the target application pods serial mode(one by one)
-    """
+    '''
     #Initialising GracePeriod
     GracePeriod = 0
 
@@ -122,9 +122,9 @@ def injectChaosInSerialMode(experimentsDetails, chaosDetails, eventsDetails, cli
     return None
 
 def injectChaosInParallelMode(experimentsDetails, chaosDetails, eventsDetails, clients):
-    """
+    '''
         injectChaosInParallelMode delete the target application pods in parallel mode (all at once)
-    """
+    '''
     #Initialising GracePeriod
     GracePeriod = 0
     #ChaosStartTimeStamp contains the start timestamp, when the chaos injection begin

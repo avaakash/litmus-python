@@ -1,10 +1,10 @@
-"""
+'''
     maths package
-"""
+'''
 
 
 def atoi(string):
-    """ Atoi stands for ASCII to Integer Conversion """
+    ''' Atoi stands for ASCII to Integer Conversion '''
     res = 0
 
     # Iterate through all characters of input and update result
@@ -15,5 +15,5 @@ def atoi(string):
 
 
 def Adjustment(a, b):
-    """ Adjustment contains rule of three for calculating an integer given another integer representing a percentage """
+    ''' Adjustment contains rule of three for calculating an integer given another integer representing a percentage '''
     return (a * b) / 100

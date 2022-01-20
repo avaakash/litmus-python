@@ -1,6 +1,6 @@
-"""
+'''
     events package
-"""
+'''
 
 
 from datetime import datetime
@@ -11,7 +11,7 @@ from pkg.utils.k8serror import k8serror
 
 
 def CreateEvents(eventsDetails, chaosDetails, kind, eventName, clients):
-    """ CreateEvents create the events in the desired resource """
+    ''' CreateEvents create the events in the desired resource '''
 
     event = client.V1Event(
         first_timestamp=datetime.now(pytz.utc),
@@ -51,7 +51,7 @@ def CreateEvents(eventsDetails, chaosDetails, kind, eventName, clients):
 
 
 def GenerateEvents(eventsDetails, chaosDetails, kind, clients):
-    """ GenerateEvents update the events and increase the count by 1, if already present else it will create a new event"""
+    ''' GenerateEvents update the events and increase the count by 1, if already present else it will create a new event'''
 
     if kind == "ChaosResult":
         eventName = eventsDetails.Reason + chaosDetails.ChaosPodName

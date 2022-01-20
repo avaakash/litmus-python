@@ -5,3 +5,5 @@
 **/*intuit.md
 **/*intuit*
 env/
+__pycache__*
+.vscode*

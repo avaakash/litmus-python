@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-"""
+'''
     setup file for the package
-"""
+'''
 
 
 import os
@@ -12,9 +12,9 @@ import setuptools
 
 
 def get_version_from_package() -> str:
-    """
+    '''
     Read the package version from the source without importing it.
-    """
+    '''
     path = os.path.join(os.path.dirname(__file__), "__init__.py")
     path = os.path.normpath(os.path.abspath(path))
     with open(path, encoding="utf-8") as file:
@@ -105,7 +105,7 @@ setup_params = dict(
 
 
 def main():
-    """Package installation entry point."""
+    '''Package installation entry point.'''
     setuptools.setup(**setup_params)
 
 

@@ -1,13 +1,13 @@
-"""
+'''
     exec pacakge
-"""
+'''
 
 
 from kubernetes.stream import stream
 
 
 class PodDetails(object):
-    """ PodDetails contains all the required variables to exec inside a container """
+    ''' PodDetails contains all the required variables to exec inside a container '''
 
     def __init__(self, PodName=None, Namespace=None, ContainerName=None):
         self.PodName = PodName
@@ -16,7 +16,7 @@ class PodDetails(object):
 
 
 def checkPodStatus(pod, containerName):
-    """ checkPodStatus verify the status of given pod & container """
+    ''' checkPodStatus verify the status of given pod & container '''
 
     if pod.status.phase.lower() != "running":
         return ValueError(f"{pod.Name} pod is not in running state, phase: {pod.Status.Phase}")
@@ -30,7 +30,7 @@ def checkPodStatus(pod, containerName):
 
 
 def Exec(commandDetails, clients, command):
-    """ Exec will execute the given command in the given container of the given pod """
+    ''' Exec will execute the given command in the given container of the given pod '''
     try:
         pod = clients.clientCoreV1.read_namespaced_pod(
             name=commandDetails.PodName, namespace=commandDetails.Namespace)
@@ -53,7 +53,7 @@ def Exec(commandDetails, clients, command):
 
 
 def SetExecCommandAttributes(podDetails, PodName, ContainerName, Namespace):
-    """ SetExecCommandAttributes initialise all the pod details  to run exec command """
+    ''' SetExecCommandAttributes initialise all the pod details  to run exec command '''
 
     podDetails.ContainerName = ContainerName
     podDetails.Namespace = Namespace
